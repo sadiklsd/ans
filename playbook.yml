@@ -22,5 +22,5 @@
     - lineinfile: dest=/etc/apt/sources.list.d/Canonical.list line='deb http://archive.canonical.com/ {{ubuntu}} partner'
     - apt_key: url=https://www.hipchat.com/keys/hipchat-linux.key state=present
     - file: path=/etc/apt/sources.list.d/atlassian-hipchat.list state=touch
-    - lineinfile: dest=/etc/apt/sources.list.d/atlassian-hipchat.list line= "deb http://downloads.hipchat.com/linux/apt stable main"
+    - lineinfile: dest=/etc/apt/sources.list.d/atlassian-hipchat.list line="deb http://downloads.hipchat.com/linux/apt stable main"
     - include: tasks/apt.yml
