@@ -19,4 +19,6 @@
     - dropbox
     - skype
     - hipchat
-    
+
+https://www.dropbox.com/download?dl=packages/dropbox.py
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
