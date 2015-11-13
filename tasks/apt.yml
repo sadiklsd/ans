@@ -20,7 +20,7 @@
     - skype
     - hipchat
 - name: Install atom packages
-- shell: apm install {{item}}
+  shell: apm install {{item}}
   sudo: yes
   with_items:
     - atom-beautify
