@@ -1,0 +1,26 @@
+---
+  - hosts: all
+    sudo: yes
+    vars:
+      ruby: ruby-2.2.1
+      ubuntu: wily
+    tasks:
+    - name: Add repo for atom
+      apt_repository: repo='ppa:webupd8team/atom'
+    - name: Add repo
+      apt_repository: repo='ppa:teejee2008/ppa'
+    - name: Add repo for kodi
+      apt_repository: repo='ppa:team-xbmc/ppa'
+    - apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state=present
+    - file: path=/etc/apt/sources.list.d/dropbox.list state=touch
+    - lineinfile: dest=/etc/apt/sources.list.d/dropbox.list state=present line="deb http://linux.dropbox.com/ubuntu/ {{ubuntu}} main"
+    - apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub
+    - file: path=/etc/apt/sources.list.d/google.list state=touch
+    - lineinfile: dest=/etc/apt/sources.list.d/google.list line="deb http://dl.google.com/linux/chrome/deb/ stable main"
+    - apt_key: keyserver=pgp.mit.edu id=5044912E
+    - file: path=/etc/apt/sources.list.d/Canonical.list state=touch
+    - lineinfile: dest=/etc/apt/sources.list.d/Canonical.list line='deb http://archive.canonical.com/ {{ubuntu}} partner'
+    - apt_key: url=https://www.hipchat.com/keys/hipchat-linux.key state=present
+    - file: path=/etc/apt/sources.list.d/atlassian-hipchat.list state=touch
+    - lineinfile: dest=/etc/apt/sources.list.d/atlassian-hipchat.list line= "deb http://downloads.hipchat.com/linux/apt stable main"
+    - include: tasks/apt.yml
