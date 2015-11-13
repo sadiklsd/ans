@@ -21,7 +21,7 @@
     - hipchat
 - name: Install atom packages
   shell: apm install {{item}}
-  sudo: yes
+  sudo: no
   with_items:
     - atom-beautify
     - atom-sync
