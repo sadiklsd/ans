@@ -1,5 +1,5 @@
 ---
-  - hosts: all
+  - hosts: local
     sudo: yes
     vars:
       ruby: ruby-2.2.1
@@ -11,6 +11,8 @@
       apt_repository: repo='ppa:teejee2008/ppa'
     - name: Add repo for kodi
       apt_repository: repo='ppa:team-xbmc/ppa'
+    - name: Icons
+      apt_repository: repo='ppa:ravefinity-project/ppa'
     - apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state=present
     - file: path=/etc/apt/sources.list.d/dropbox.list state=touch
     - lineinfile: dest=/etc/apt/sources.list.d/dropbox.list state=present line="deb http://linux.dropbox.com/ubuntu/ {{ubuntu}} main"
