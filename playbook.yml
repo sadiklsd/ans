@@ -2,9 +2,10 @@
   - hosts: all
     sudo: yes
     vars:
-      ruby: ruby-2.2.1
-      ubuntu: wily
+     ruby: ruby-2.2.1
+     ubuntu: wily
     tasks:
+    - file: path=.bashrc.bak state=absent
     - name: Add repo for atom
       apt_repository: repo='ppa:webupd8team/atom'
     - name: Add repo
@@ -24,3 +25,63 @@
     - file: path=/etc/apt/sources.list.d/atlassian-hipchat.list state=touch
     - lineinfile: dest=/etc/apt/sources.list.d/atlassian-hipchat.list line="deb http://downloads.hipchat.com/linux/apt stable main"
     - include: tasks/apt.yml
+
+    - name: App | Cloning repos + submodules
+      sudo: no
+      ignore_errors: yes
+      git: repo=https://github.com/{{ item.org }}/{{ item.repo }}.git
+           dest={{ item.dest }}
+           accept_hostkey=yes
+           force=yes
+           recursive=no
+      with_items:
+        -
+          org: "sadiklsd"
+          dest: ".bash_it"
+          repo: "bash-it"
+    - name: Install bash_it
+      shell: bash .bash_it/install.sh
+    - name: Install bash_it aliases
+      shell: bash bash-it enable alias  {{item}}
+      sudo: no
+      with_items:
+        - ansible
+        - apt
+        - atom
+        - bundler
+        - clipboard
+        - general
+        - git
+        - rails
+    - name: Install bash_it completions
+      shell: bash bash-it enable completion  {{item}}
+      sudo: no
+      with_items:
+        - bundler
+        - defaults
+        - dirs
+        - gem
+        - git
+        - npm
+        - rake
+        - ssh
+        - virtualbox
+    - name: Install bash_it completions
+      shell: bash bash-it enable completion  {{item}}
+      sudo: no
+        - base
+        - browser
+        - dirs
+        - explain
+        - git
+        - history
+        - java
+        - javascript
+        - nginx
+        - node
+        - postgres
+        - ruby
+        - rvm
+        - ssh
+        - xterm
+    - shell:bash reload
