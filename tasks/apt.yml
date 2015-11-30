@@ -25,7 +25,7 @@
     - unity-tweak-tool
     - libcurl3-dev
     - curl
-    - libpq
+    - libpq-dev
 - name: Install atom packages
   shell: apm install {{item}}
   sudo: no

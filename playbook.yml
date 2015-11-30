@@ -1,5 +1,5 @@
 ---
-  - hosts: local
+  - hosts: all
     sudo: yes
     vars:
      ruby: ruby-2.2.1
@@ -26,6 +26,8 @@
     - apt_key: url=https://www.hipchat.com/keys/hipchat-linux.key state=present
     - file: path=/etc/apt/sources.list.d/atlassian-hipchat.list state=touch
     - lineinfile: dest=/etc/apt/sources.list.d/atlassian-hipchat.list line="deb http://downloads.hipchat.com/linux/apt stable main"
+    - name: Update apt
+      apt: update_cache=yes
     - include: tasks/apt.yml
 
     - name: App | Cloning repos + submodules
@@ -86,4 +88,4 @@
         - rvm
         - ssh
         - xterm
-    - shell:bash reload
+    - shell: bash reload
