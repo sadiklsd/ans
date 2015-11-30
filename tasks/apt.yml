@@ -41,7 +41,9 @@
   sudo: no
   shell: curl -sSL https://get.rvm.io | bash -s stable
 - name: source rvm
-  shell: source $HOME/.rvm/scripts/rvm  
+  shell: source $HOME/.rvm/scripts/rvm
+  args:
+     executable: /bin/bash
 - name: Install ruby 2.2.1
   sudo: no
   shell: rvm install 2.2.1
