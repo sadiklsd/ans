@@ -35,10 +35,14 @@
     - language-ansible
     - file-icons
 - name: Install rvm key
+  sudo: no
   shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 - name: Install rvm
+  sudo: no
   shell: curl -sSL https://get.rvm.io | bash -s stable
 - name: Install ruby 2.2.1
+  sudo: no
   shell: rvm install 2.2.1
 - name: Install rvm for cron
+  sudo: no
   shell: rvm cron setup;gem install bundler
